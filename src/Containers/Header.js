@@ -32,6 +32,34 @@ const staticNav = [
     navigation: "test",
     link: "/",
   },
+  {
+    id: 5,
+    navigation: "test",
+    link: "/",
+  },
+  {
+    id: 5,
+    navigation: "test",
+    link: "/",
+  },
+  {
+    id: 5,
+    navigation: "test",
+    link: "/",
+  },
+];
+
+const footerSidebar = [
+  {
+    id: 1,
+    navigation: "Shilapatra TV",
+    icon: "shilapatra-video",
+  },
+  {
+    id: 2,
+    navigation: "Shilapatra Podcast",
+    icon: "podcast-icon",
+  },
 ];
 
 const Sidebar = styled.div`
@@ -69,8 +97,8 @@ const Hamburger = ({ onClick, className }) => {
   );
 };
 
-const ContainerBox = ({ children }) => {
-  return <div className="top__links">{children}</div>;
+const ContainerBox = ({ children, className }) => {
+  return <div className={`top__links container ${className}`}>{children}</div>;
 };
 
 const AddBox = ({ img }) => {
@@ -81,6 +109,53 @@ const AddBox = ({ img }) => {
         alt="Rectangle"
         className="add_box"
       />
+    </div>
+  );
+};
+
+const SidebarDropDown = ({ windowWidth }) => {
+  return (
+    <Link
+      class={`nav-link ${
+        +windowWidth <= 768 ? "mobile-sidebar" : "desktop-sidebar"
+      }`}
+    >
+      <div>
+        University Books <i class="fas fa-caret-down"></i>
+      </div>
+      <div class="dropdown">
+        <ul>
+          {["nav", "nva", "nva", "nva"].map((item) => {
+            return (
+              <li class="dropdown-link">
+                <Link href="#">
+                  {" "}
+                  BBS <i class="fas fa-caret-right"></i>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </Link>
+  );
+};
+
+const CommonLink = ({ className }) => {
+  return (
+    <div className={`${className} common-link`}>
+      {footerSidebar.map((item) => {
+        return (
+          <Link to="#">
+            <span className="icon">
+              {item.icon && (
+                <img src={require(`../Images/${item.icon}.svg`)} alt="" />
+              )}
+            </span>
+            <span>{item.navigation}</span>
+          </Link>
+        );
+      })}
     </div>
   );
 };
@@ -112,7 +187,7 @@ const Header = ({ documentCategorys = [], isLoading }) => {
   return (
     <>
       <div className="top__header container">
-        <ContainerBox>
+        <ContainerBox className="remove-mobile">
           {staticNav.map((nav) => {
             return (
               <Link to="/" className="top__header-a">
@@ -129,18 +204,18 @@ const Header = ({ documentCategorys = [], isLoading }) => {
         <div className="final__logo">
           <div className="final__logo-image">
             <img
-              src=" https://shilapatra.com/themes/shilapatra/images/logo.svg "
+              src={require("../Images/shilapatra-text.svg").default}
               alt=""
             />
           </div>
           <div className="final__logo-date">
-            <span className="eng-date"></span>
-            <span className="nep-date"></span>
+            <span className="eng-date">Thursday, 10 September 2020</span>
+            <span className="nep-date"> बिहीबार, २५ भदौ २०७७</span>
           </div>
         </div>
       </div>
-      <header className="">
-        <nav className="nav-area container">
+      <header className="container">
+        <nav className="nav-area ">
           <input type="checkbox" id="check" checked={activeSidebar} />
           <Hamburger
             onClick={() => setActiveSiderbar(!activeSidebar)}
@@ -168,31 +243,16 @@ const Header = ({ documentCategorys = [], isLoading }) => {
                   </a>
                   <div class="dropdown">
                     <ul>
-                      <li class="dropdown-link">
-                        <a href="#">
-                          {" "}
-                          BBS <i class="fas fa-caret-right"></i>
-                        </a>
-                      </li>
-                      <li class="dropdown-link">
-                        <a href="#">
-                          {" "}
-                          BBA <i class="fas fa-caret-right"></i>
-                        </a>
-                      </li>
-                      <li class="dropdown-link">
-                        <a href="#">
-                          {" "}
-                          BIM <i class="fas fa-caret-right"></i>
-                        </a>
-                      </li>
-                      <li class="dropdown-link">
-                        <a href="#">
-                          {" "}
-                          BHM<i class="fas fa-caret-right"></i>{" "}
-                        </a>
-                      </li>
-                      <div class="arrow"></div>
+                      {["nav", "nva", "nva", "nva"].map((item) => {
+                        return (
+                          <li class="dropdown-link">
+                            <Link href="#">
+                              {" "}
+                              BBS <i class="fas fa-caret-right"></i>
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </li>
@@ -200,11 +260,13 @@ const Header = ({ documentCategorys = [], isLoading }) => {
             </div>
           </div>
           <div className="side__container">
-            <div className="search"></div>
             <button className="default-btn">Unicode</button>
           </div>
         </nav>
       </header>
+      <ContainerBox>
+        {<CommonLink className="front-nav container"></CommonLink>}
+      </ContainerBox>
       <Sidebar
         isActive={activeSidebar}
         itemName="sidebar-id"
@@ -236,41 +298,9 @@ const Header = ({ documentCategorys = [], isLoading }) => {
               </Link>
             );
           })}
-          <a class={`nav-link ${"desktop-sidebar"}`}>
-            <div>
-              University Books <i class="fas fa-caret-down"></i>
-            </div>
-            <div class="dropdown">
-              <ul>
-                <li class="dropdown-link">
-                  <a href="#">
-                    {" "}
-                    BBS <i class="fas fa-caret-right"></i>
-                  </a>
-                </li>
-                <li class="dropdown-link">
-                  <a href="#">
-                    {" "}
-                    BBA <i class="fas fa-caret-right"></i>
-                  </a>
-                </li>
-                <li class="dropdown-link">
-                  <a href="#">
-                    {" "}
-                    BIM <i class="fas fa-caret-right"></i>
-                  </a>
-                </li>
-                <li class="dropdown-link">
-                  <a href="#">
-                    {" "}
-                    BHM<i class="fas fa-caret-right"></i>{" "}
-                  </a>
-                </li>
-                <div class="arrow"></div>
-              </ul>
-            </div>
-          </a>
+          <SidebarDropDown windowWidth={windowWidth}></SidebarDropDown>
         </ul>
+        <CommonLink className="sidebar-footer"></CommonLink>
       </Sidebar>
     </>
   );
