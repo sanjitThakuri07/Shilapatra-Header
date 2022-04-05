@@ -1,0 +1,7 @@
+Images folder contains all the images used in the header components
+
+header.scss contains all the scss related to navigation
+
+Important files
+Header.js -> present in containers
+header.scss -> present in containers
