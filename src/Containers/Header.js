@@ -113,6 +113,7 @@ const AddBox = ({ img }) => {
   );
 };
 
+// for dropdown in sidebar
 const SidebarDropDown = ({ windowWidth }) => {
   return (
     <Link
@@ -141,6 +142,7 @@ const SidebarDropDown = ({ windowWidth }) => {
   );
 };
 
+// common link present in before opening sidebar and in sidebar
 const CommonLink = ({ className }) => {
   return (
     <div className={`${className} common-link`}>
@@ -187,6 +189,7 @@ const Header = ({ documentCategorys = [], isLoading }) => {
   return (
     <>
       <div className="top__header container">
+        {/* top most header */}
         <ContainerBox className="remove-mobile">
           {staticNav.map((nav) => {
             return (
@@ -196,11 +199,13 @@ const Header = ({ documentCategorys = [], isLoading }) => {
             );
           })}
         </ContainerBox>
+        {/* addvertisment */}
         <div className="row add_box" style={{ paddingTop: "16px" }}>
           {[0, 1].map((item) => (
             <AddBox></AddBox>
           ))}
         </div>
+        {/* logo and date section */}
         <div className="final__logo">
           <div className="final__logo-image">
             <img
@@ -214,6 +219,7 @@ const Header = ({ documentCategorys = [], isLoading }) => {
           </div>
         </div>
       </div>
+      {/* navigation section */}
       <header className="container">
         <nav className="nav-area ">
           <input type="checkbox" id="check" checked={activeSidebar} />
@@ -227,6 +233,7 @@ const Header = ({ documentCategorys = [], isLoading }) => {
           <div className="main__nav-container">
             <div className="nav__list-container">
               <ul className="nav__list">
+                {/* icon link */}
                 <Link to="/" className="nav__list-link no_hover">
                   <img src={require("../Images/icon-logo.png")} alt="" />
                 </Link>
@@ -237,6 +244,7 @@ const Header = ({ documentCategorys = [], isLoading }) => {
                     </Link>
                   );
                 })}
+                {/* link with drop down */}
                 <li class="nav-link desktop-nav">
                   <a href="#">
                     University Books <i class="fas fa-caret-down"></i>
